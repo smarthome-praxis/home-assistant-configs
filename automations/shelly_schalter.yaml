@@ -1,0 +1,41 @@
+# Shelly 1 Mini als Smart-Schalter mit Toggle-Funktion
+# Tutorial: https://smarthome-praxis.de/shelly-1-mini-gen3-einrichten/
+
+alias: Shelly - Wandschalter toggle
+description: >
+  Normaler Wandschalter steuert Shelly-Gerät auch wenn Shelly per App
+  bereits geschalten wurde. Verhindert Synchronisationsprobleme.
+  Mehr: https://smarthome-praxis.de/shelly-1-mini-gen3-einrichten/
+
+trigger:
+  - platform: state
+    entity_id: binary_sensor.shelly_1mini_eingang  # anpassen (Shelly Input)
+
+action:
+  - service: light.toggle
+    target:
+      entity_id: light.wohnzimmer_decke  # anpassen
+
+mode: single
+
+---
+
+alias: Shelly - Automatisch aus nach Zeit
+description: Shelly-Steckdose nach 2 Stunden ausschalten (z.B. Wasserkocher)
+
+trigger:
+  - platform: state
+    entity_id: switch.shelly_steckdose_kueche  # anpassen
+    to: "on"
+    for:
+      hours: 2
+
+action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.shelly_steckdose_kueche  # anpassen
+  - service: notify.mobile_app
+    data:
+      message: "Shelly Küche nach 2h automatisch ausgeschaltet"
+
+mode: single
