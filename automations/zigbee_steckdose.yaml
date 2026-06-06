@@ -1,0 +1,77 @@
+# Zigbee-Steckdose nach Zeitplan steuern
+# Tutorial: https://smarthome-praxis.de/beste-zigbee-steckdosen/
+#
+# Funktioniert mit allen Zigbee2MQTT oder ZHA kompatiblen Steckdosen
+
+alias: Steckdose - Zeitplan Morgen ein
+description: >
+  Schaltet Zigbee-Steckdose morgens ein (z.B. Kaffeemaschine) und
+  abends automatisch wieder aus.
+  Mehr: https://smarthome-praxis.de/beste-zigbee-steckdosen/
+
+trigger:
+  - platform: time
+    at: "07:00:00"
+
+condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+
+action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.steckdose_kueche  # anpassen
+
+mode: single
+
+---
+
+alias: Steckdose - Zeitplan Abend aus
+description: Steckdose abends automatisch ausschalten
+
+trigger:
+  - platform: time
+    at: "22:00:00"
+
+action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.steckdose_kueche  # anpassen
+
+mode: single
+
+---
+
+alias: Steckdose - Leerlauf erkennen und ausschalten
+description: >
+  Schaltet Steckdose aus wenn Gerät im Standby/Leerlauf ist.
+  Benötigt Steckdose mit Leistungsmessung (z.B. SONOFF S26R2ZB).
+  Geräteliste: https://smarthome-praxis.de/beste-zigbee-steckdosen/
+
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.steckdose_kueche_power  # anpassen (Watt-Sensor)
+    below: 5
+    for:
+      minutes: 10
+
+condition:
+  - condition: state
+    entity_id: switch.steckdose_kueche  # anpassen
+    state: "on"
+
+action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.steckdose_kueche  # anpassen
+  - service: notify.mobile_app
+    data:
+      title: "Steckdose ausgeschaltet"
+      message: "Gerät im Leerlauf erkannt – Steckdose automatisch aus"
+
+mode: single
