@@ -1,0 +1,63 @@
+# Anwesenheitserkennung - Begrüßung & Abschied
+# Tutorial: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+
+alias: Anwesenheit - Jemand kommt nach Hause
+description: >
+  Aktionen wenn erste Person nach Hause kommt.
+  Mehr: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+
+trigger:
+  - platform: state
+    entity_id: group.alle_personen  # Personen-Gruppe anlegen in HA
+    to: home
+
+condition:
+  - condition: state
+    entity_id: group.alle_personen
+    state: not_home
+    for:
+      minutes: 5
+
+action:
+  - service: light.turn_on
+    target:
+      area_id: wohnzimmer  # anpassen
+  - service: climate.set_preset_mode
+    target:
+      entity_id: climate.thermostat_wohnzimmer  # anpassen
+    data:
+      preset_mode: home
+  - service: notify.mobile_app  # anpassen
+    data:
+      message: "Willkommen zu Hause!"
+
+mode: single
+
+---
+
+alias: Anwesenheit - Alle haben das Haus verlassen
+description: Sicherheits- und Energiesparmodus wenn niemand zu Hause
+
+trigger:
+  - platform: state
+    entity_id: group.alle_personen
+    to: not_home
+    for:
+      minutes: 3
+
+action:
+  - service: light.turn_off
+    target:
+      area_id: all
+  - service: climate.set_preset_mode
+    target:
+      entity_id: climate.thermostat_wohnzimmer  # anpassen
+    data:
+      preset_mode: away
+  - service: switch.turn_off
+    target:
+      entity_id:
+        - switch.steckdose_tv  # anpassen
+        - switch.steckdose_kueche  # anpassen
+
+mode: single
