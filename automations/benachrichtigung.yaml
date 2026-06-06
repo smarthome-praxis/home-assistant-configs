@@ -1,0 +1,85 @@
+# Push-Benachrichtigungen bei Smart Home Ereignissen
+# Tutorial: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+#
+# Voraussetzung: Home Assistant Companion App auf dem Smartphone
+
+alias: Benachrichtigung - Türsensor geöffnet
+description: >
+  Push-Nachricht wenn Haustür geöffnet wird während niemand zu Hause ist.
+  Mehr: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+
+trigger:
+  - platform: state
+    entity_id: binary_sensor.haustuer  # anpassen (Zigbee Türsensor)
+    to: "on"
+
+condition:
+  - condition: state
+    entity_id: group.alle_personen
+    state: not_home
+
+action:
+  - service: notify.mobile_app  # anpassen (notify.mobile_app_DEINNAME)
+    data:
+      title: "Tür geöffnet"
+      message: "Haustür wurde geöffnet – niemand ist zu Hause"
+      data:
+        push:
+          sound: default
+        importance: high
+
+mode: single
+
+---
+
+alias: Benachrichtigung - Bewegung außen nachts
+description: >
+  Benachrichtigung bei Bewegung im Außenbereich zwischen 22 und 6 Uhr.
+  Für Zigbee-Bewegungsmelder: https://smarthome-praxis.de/beste-zigbee-bewegungsmelder-2026/
+
+trigger:
+  - platform: state
+    entity_id: binary_sensor.bewegungsmelder_aussen  # anpassen
+    to: "on"
+
+condition:
+  - condition: time
+    after: "22:00:00"
+    before: "06:00:00"
+
+action:
+  - service: notify.mobile_app
+    data:
+      title: "Bewegung erkannt"
+      message: "Bewegung im Außenbereich nachts erkannt"
+      data:
+        importance: high
+
+mode: single
+
+---
+
+alias: Benachrichtigung - Wassermelder Alarm
+description: Sofortbenachrichtigung bei Wasserleck
+
+trigger:
+  - platform: state
+    entity_id: binary_sensor.wassermelder_keller  # anpassen
+    to: "on"
+
+action:
+  - service: notify.mobile_app
+    data:
+      title: "WASSERLECK!"
+      message: "Wassermelder im Keller hat angeschlagen – sofort prüfen!"
+      data:
+        push:
+          sound: "US-EN-Morgan-Freeman-Vacate-The-Premises.wav"
+        importance: high
+        ttl: 0
+        priority: high
+  - service: switch.turn_off
+    target:
+      entity_id: switch.wasserventil_haupt  # anpassen – falls vorhanden
+
+mode: single
