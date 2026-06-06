@@ -1,11 +1,11 @@
 # Shelly 1 Mini als Smart-Schalter mit Toggle-Funktion
-# Tutorial: https://smarthome-praxis.de/shelly-1-mini-gen3-einrichten/
+# Tutorial: https://smarthome-praxis.de/smart-home-geraete/shelly-1-mini-gen3-einrichten/
 
 alias: Shelly - Wandschalter toggle
 description: >
   Normaler Wandschalter steuert Shelly-Gerät auch wenn Shelly per App
   bereits geschalten wurde. Verhindert Synchronisationsprobleme.
-  Mehr: https://smarthome-praxis.de/shelly-1-mini-gen3-einrichten/
+  Mehr: https://smarthome-praxis.de/smart-home-geraete/shelly-1-mini-gen3-einrichten/
 
 trigger:
   - platform: state
