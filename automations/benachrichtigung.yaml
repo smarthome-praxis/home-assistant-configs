@@ -1,12 +1,12 @@
 # Push-Benachrichtigungen bei Smart Home Ereignissen
-# Tutorial: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+# Tutorial: https://smarthome-praxis.de/home-assistant/home-assistant-automationen-erstellen/
 #
 # Voraussetzung: Home Assistant Companion App auf dem Smartphone
 
 alias: Benachrichtigung - Türsensor geöffnet
 description: >
   Push-Nachricht wenn Haustür geöffnet wird während niemand zu Hause ist.
-  Mehr: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+  Mehr: https://smarthome-praxis.de/home-assistant/home-assistant-automationen-erstellen/
 
 trigger:
   - platform: state
@@ -35,7 +35,7 @@ mode: single
 alias: Benachrichtigung - Bewegung außen nachts
 description: >
   Benachrichtigung bei Bewegung im Außenbereich zwischen 22 und 6 Uhr.
-  Für Zigbee-Bewegungsmelder: https://smarthome-praxis.de/beste-zigbee-bewegungsmelder-2026/
+  Für Zigbee-Bewegungsmelder: https://smarthome-praxis.de/smart-home-grundlagen/beste-zigbee-bewegungsmelder-2026/
 
 trigger:
   - platform: state
