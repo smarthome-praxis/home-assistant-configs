@@ -1,5 +1,5 @@
 # Heizung bei offenem Fenster abschalten
-# Tutorial: https://smarthome-praxis.de/heizung-home-assistant-thermostat/
+# Tutorial: https://smarthome-praxis.de/smart-home-geraete/heizung-home-assistant-thermostat/
 #
 # Anpassen: entity_id der Fensterkontakte und Thermostate ersetzen
 
@@ -7,7 +7,7 @@ alias: Heizung - Fenster offen erkannt
 description: >
   Schaltet Heizkörperthermostat auf Frost-Schutz wenn Fenster länger als
   5 Minuten offen ist. Reaktiviert Heizung wenn Fenster geschlossen wird.
-  Mehr: https://smarthome-praxis.de/heizung-home-assistant-thermostat/
+  Mehr: https://smarthome-praxis.de/smart-home-geraete/heizung-home-assistant-thermostat/
 
 trigger:
   - platform: state
