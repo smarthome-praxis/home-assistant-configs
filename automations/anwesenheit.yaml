@@ -1,10 +1,10 @@
 # Anwesenheitserkennung - Begrüßung & Abschied
-# Tutorial: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+# Tutorial: https://smarthome-praxis.de/home-assistant/home-assistant-automationen-erstellen/
 
 alias: Anwesenheit - Jemand kommt nach Hause
 description: >
   Aktionen wenn erste Person nach Hause kommt.
-  Mehr: https://smarthome-praxis.de/home-assistant-automationen-erstellen/
+  Mehr: https://smarthome-praxis.de/home-assistant/home-assistant-automationen-erstellen/
 
 trigger:
   - platform: state
