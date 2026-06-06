@@ -1,5 +1,5 @@
 # Zigbee-Steckdose nach Zeitplan steuern
-# Tutorial: https://smarthome-praxis.de/beste-zigbee-steckdosen/
+# Tutorial: https://smarthome-praxis.de/ratgeber/beste-zigbee-steckdosen/
 #
 # Funktioniert mit allen Zigbee2MQTT oder ZHA kompatiblen Steckdosen
 
@@ -7,7 +7,7 @@ alias: Steckdose - Zeitplan Morgen ein
 description: >
   Schaltet Zigbee-Steckdose morgens ein (z.B. Kaffeemaschine) und
   abends automatisch wieder aus.
-  Mehr: https://smarthome-praxis.de/beste-zigbee-steckdosen/
+  Mehr: https://smarthome-praxis.de/ratgeber/beste-zigbee-steckdosen/
 
 trigger:
   - platform: time
@@ -51,7 +51,7 @@ alias: Steckdose - Leerlauf erkennen und ausschalten
 description: >
   Schaltet Steckdose aus wenn Gerät im Standby/Leerlauf ist.
   Benötigt Steckdose mit Leistungsmessung (z.B. SONOFF S26R2ZB).
-  Geräteliste: https://smarthome-praxis.de/beste-zigbee-steckdosen/
+  Geräteliste: https://smarthome-praxis.de/ratgeber/beste-zigbee-steckdosen/
 
 trigger:
   - platform: numeric_state
