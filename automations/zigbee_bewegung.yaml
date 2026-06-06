@@ -1,5 +1,5 @@
 # Licht per Zigbee-Bewegungsmelder schalten
-# Tutorial: https://smarthome-praxis.de/beste-zigbee-bewegungsmelder-2026/
+# Tutorial: https://smarthome-praxis.de/smart-home-grundlagen/beste-zigbee-bewegungsmelder-2026/
 #
 # Funktioniert mit allen Zigbee2MQTT oder ZHA Bewegungsmeldern
 
@@ -7,7 +7,7 @@ alias: Licht - Bewegungsmelder Flur
 description: >
   Schaltet Flurbeleuchtung bei Bewegung ein, automatisch aus nach 5 Minuten
   ohne Bewegung. Nur aktiv wenn es dunkel ist (Lux-Schwelle).
-  Mehr: https://smarthome-praxis.de/beste-zigbee-bewegungsmelder-2026/
+  Mehr: https://smarthome-praxis.de/smart-home-grundlagen/beste-zigbee-bewegungsmelder-2026/
 
 trigger:
   - platform: state
